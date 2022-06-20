@@ -36,21 +36,9 @@
 
 <script>
 // @ is an alias to /src
-import button from '@/components/button/index.vue'
-import row from '@/components/row/index.vue'
-import dropdown from '@/components/dropdown/index.vue'
-import menu from '@/components/menu/index.vue'
-import menuItem from '@/components/menuItem/index.vue'
-import pagination from '@/components/pagination/index.vue'
 export default {
   name: 'HomeView',
   components: {
-    [button.name]: button,
-    [row.name]: row,
-    [dropdown.name]: dropdown,
-    [menu.name]: menu,
-    [menuItem.name]: menuItem,
-    [pagination.name]: pagination,
   },
   data() {
     return {

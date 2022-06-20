@@ -5,7 +5,6 @@
       <slot></slot>
       <slot name="after"></slot>
     </button>
-    {{  }}
   </span>
 </template>
 

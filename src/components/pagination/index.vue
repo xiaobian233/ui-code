@@ -101,8 +101,8 @@ export default {
     watch(() => props, () => init(props), { deep: true, immediate: true })
     const getTotalTitle = computed(() => {
       let res = `总共为: ${props.total} 条数据`
-      typeof totalTitle === 'string' ? res = totalTitle : null
-      typeof totalTitle === 'function' ? res = totalTitle() : null
+      typeof props.totalTitle === 'string' ? res = props.totalTitle : null
+      typeof props.totalTitle === 'function' ? res = props.totalTitle() : null
       return res
     })
     return { ...toRefs(data), getItem, clickTop, menuChange, getTotalTitle }
