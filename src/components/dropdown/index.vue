@@ -3,7 +3,7 @@
     <div class="w-dropdown-title" ref="wDropdownTitle">
       <slot />
     </div>
-    <div ref="dropdownContent" class="w-dropdown-content" :class="isCont ? 'animate__animated animate__fadeIn' : 'animate__animated animate__fadeOut'" :style="styleContent" v-if="isCont">
+    <div ref="dropdownContent" class="w-dropdown-content" :class="isCont ? 'animate__fadeInDown' : 'animate__animated animate__fadeOut'" :style="styleContent" v-if="isCont">
       <slot name="content" />
     </div>
   </div>
@@ -68,6 +68,7 @@ export default {
   background: transparent;
 }
 .w-dropdown-content {
+  z-index: 99;
   margin-top: 4px;
   position: absolute;
   background-color: #fff;
@@ -82,5 +83,24 @@ export default {
 .w-dropdown-title {
   cursor: pointer;
   color: $wang-primary-color;
+}
+.animate__fadeInDown {
+  animation-name: fadeInDown;
+  animation-duration: 1s;
+  animation-duration: var(--animate-duration);
+  animation-fill-mode: both;
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+    z-index: -1;
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    z-index: 1;
+  }
 }
 </style>

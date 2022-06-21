@@ -1,10 +1,10 @@
 <template>
   <div class="w-upload">
     <div class="w-upload-file">
-      <input type="file" :accept="accept" :multiple="multiple" :disabled="disabled" />
+      <input type="file" :accept="accept" :multiple="multiple" :disabled="disabled" v-bind="$attr" />
       <slot />
     </div>
-    <div class="w-upload-files">
+    <div class="w-upload-list">
       <slot name="fileList" :fileList="fileLists" />
     </div>
   </div>
@@ -54,6 +54,7 @@ export default {
         const bol = props.beforeUpload(file)
         if (bol === false) {
           // 失败时
+          data.fileLists = data.fileLists.slice(0, -1)
           props.change({ file, status: 'error' }, data.fileLists)
           return false
         }

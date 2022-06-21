@@ -34,9 +34,7 @@
     <w-upload v-model:fileList="files" :change="(file,list)=>change(file,list)">
       <w-button>click to Upload</w-button>
       <template #fileList="{fileList}">
-        <div v-for="v,i in fileList" :key="i">
-          {{ v.name }}
-        </div>
+        <fileView :data="fileList" />
       </template>
     </w-upload>
   </div>
