@@ -27,10 +27,13 @@
     <hr>
     <br>
     <w-pagination :total="total" v-model:current="current" v-model:pageSize="pageSize" />
-    <p>值变化:  --- {{ current  }} --- {{ pageSize }} --- {{ total }} ---</p>
+    <p>值变化: --- {{ current  }} --- {{ pageSize }} --- {{ total }} ---</p>
     <br>
     <hr>
     <br>
+    <w-upload @change="file=>change(file)">
+      <w-button>click to Upload</w-button>
+    </w-upload>
   </div>
 </template>
 

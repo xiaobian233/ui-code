@@ -4,14 +4,15 @@ import dropdown from './dropdown/index.vue'
 import menu from './menu/index.vue'
 import menuItem from './menuItem/index.vue'
 import pagination from './pagination/index.vue'
-
+import upload from './upload/index.vue'
 let components = [
     button,
     row,
     dropdown,
     menu,
     menuItem,
-    pagination
+    pagination,
+    upload
 ]
 
 export default {
