@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <w-row span="24" @click="change(9)">
-      <w-button type="primary" @change="change(1)">
+      <w-button type="primary" @change="change(1)">s
         <template #before>
-          <span>这是左边slot</span>
+          <span>left</span>
         </template>
-        <span style=" margin: 0 20px;">按钮button</span>
+        <span style=" margin: 0 8px;">按钮button</span>
         <template #after>
-          <span>这是右边slot</span>
+          <span>right</span>
         </template>
       </w-button>
       <w-button :disabled="true" @change="change(0)">按钮button2</w-button>
@@ -31,8 +31,13 @@
     <br>
     <hr>
     <br>
-    <w-upload @change="file=>change(file)">
+    <w-upload v-model:fileList="files" :change="(file,list)=>change(file,list)">
       <w-button>click to Upload</w-button>
+      <template #fileList="{fileList}">
+        <div v-for="v,i in fileList" :key="i">
+          {{ v.name }}
+        </div>
+      </template>
     </w-upload>
   </div>
 </template>
@@ -48,7 +53,8 @@ export default {
       carl: [1, 2, 3, 4, 5],
       total: 237,
       current: 19,
-      pageSize: 10
+      pageSize: 10,
+      files: []
     }
   },
   methods: {
