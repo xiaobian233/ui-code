@@ -1,6 +1,6 @@
 <template>
   <div class="w-modal" v-if="visibles">
-    <div class="w-modal-mask"></div>
+    <div class="w-modal-mask" @click="removeChange('cancel')"></div>
     <div class="w-modal-banner" :class="[visibles?'animate__animated animate__zoomIn' : '']">
       <!-- body -->
       <slot name="body">
@@ -28,14 +28,15 @@
 </template>
 
 <script>
-import { computed, nextTick, reactive, toRefs, watchEffect } from '@vue/runtime-core'
-export default {
+import { computed, nextTick, reactive, toRefs, watchEffect, defineComponent } from '@vue/runtime-core'
+// import { modelHook } from '../../hook/modelHook'
+export default defineComponent({
   name: 'w-modal',
   props: {
     title: { type: String, default: '' },
     visible: { type: Boolean, default: false }
   },
-  setup(props, { emit }) {
+  setup(props, { emit, expose }) {
     const data = reactive({ visibles: false })
     const addStyle = el => {
       el.style.overflow = 'hidden'
@@ -48,6 +49,7 @@ export default {
     const removeChange = (key) => {
       emit('update:visible', false)
     }
+    const checkTarget = computed(() => data.visibles ? 'click' : '')
     watchEffect(() => {
       data.visibles = props.visible
       nextTick(() => {
@@ -56,12 +58,16 @@ export default {
         else removeStyle(body)
       })
     })
+    expose({
+      data,
+    })
     return {
       ...toRefs(data),
-      removeChange
+      removeChange,
+      checkTarget
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

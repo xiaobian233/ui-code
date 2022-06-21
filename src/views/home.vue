@@ -26,7 +26,7 @@
     <br>
     <hr>
     <br>
-    <w-pagination :total="total" v-model:current="current" v-model:pageSize="pageSize" />
+    <!-- <w-pagination :total="total" v-model:current="current" v-model:pageSize="pageSize" /> -->
     <p>值变化: --- {{ current  }} --- {{ pageSize }} --- {{ total }} ---</p>
     <br>
     <hr>
@@ -34,7 +34,7 @@
     <w-upload v-model:fileList="files" :change="(file,list)=>change(file,list)">
       <w-button>click to Upload</w-button>
       <template #fileList="{fileList}">
-        <fileView :data="fileList" />
+        <w-fileView :data="fileList" />
       </template>
     </w-upload>
     <br>
@@ -44,6 +44,10 @@
     <w-modal v-model:visible="visibles" title="click to modal" @cancel="sty=>change(sty)" @ok="sty=>change(sty)">
       12345789
     </w-modal>
+    <br>
+    <hr>
+    <br>
+    <w-button @change="changeModal">hooks to modal</w-button>
     <br>
     <hr>
     <br>
@@ -71,7 +75,7 @@ export default {
       console.error(val, 'emit 触发=====', num)
     },
     changeModal() {
-
+      this.$hooks.useModal()
     }
   },
 }

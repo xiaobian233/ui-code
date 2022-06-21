@@ -1,7 +1,7 @@
 <template>
   <div class="w-upload">
     <div class="w-upload-file">
-      <input type="file" :accept="accept" :multiple="multiple" :disabled="disabled" v-bind="$attr" />
+      <input type="file" :accept="accept" :multiple="multiple" :disabled="disabled" />
       <slot />
     </div>
     <div class="w-upload-list">

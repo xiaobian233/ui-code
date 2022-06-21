@@ -6,5 +6,6 @@ import '@/assets/css/reset.scss'
 import 'animate.css'
 import directives from '@/assets/uilt/directive'
 import uiSDK from '@/components/index'
-const app = createApp(App).use(store).use(router).use(directives).use(uiSDK).mount('#app')
+import hooks from "@/hook"
+const app = createApp(App).use(store).use(router).use(directives).use(uiSDK).use(hooks).mount('#app')
 window.vm = app
