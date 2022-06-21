@@ -6,6 +6,7 @@ import menuItem from './menuItem/index.vue'
 import pagination from './pagination/index.vue'
 import upload from './upload/index.vue'
 import fileView from './fileView/index.vue'
+import modal from './modal/index.vue'
 let components = [
     button,
     row,
@@ -14,7 +15,8 @@ let components = [
     menuItem,
     pagination,
     upload,
-    fileView
+    fileView,
+    modal
 ]
 
 export default {

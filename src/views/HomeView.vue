@@ -37,6 +37,16 @@
         <fileView :data="fileList" />
       </template>
     </w-upload>
+    <br>
+    <hr>
+    <br>
+    <w-button @change="visibles = true">click to modal</w-button>
+    <w-modal v-model:visible="visibles" title="click to modal" @cancel="sty=>change(sty)" @ok="sty=>change(sty)">
+      12345789
+    </w-modal>
+    <br>
+    <hr>
+    <br>
   </div>
 </template>
 
@@ -52,12 +62,16 @@ export default {
       total: 237,
       current: 19,
       pageSize: 10,
-      files: []
+      files: [],
+      visibles: false
     }
   },
   methods: {
     change(val, num) {
       console.error(val, 'emit 触发=====', num)
+    },
+    changeModal() {
+
     }
   },
 }

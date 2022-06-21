@@ -23,7 +23,7 @@ export default {
     accept: { type: String, default: '' },
     multiple: { type: Boolean, default: false }
   },
-  setup(props, { emit }) {
+  setup(props, { emit, expose }) {
     const data = reactive({
       fileLists: []
     })
@@ -67,6 +67,11 @@ export default {
         data.fileLists = props.fileList
       })
     }
+    // 外部触发click
+    const exportclick = () => {
+      nextTick(() => document.querySelector('.w-upload-file').click())
+    }
+    expose({ exportclick })
     onMounted(() => { uploadFile() })
     return { ...toRefs(data), uploadFile }
   }
