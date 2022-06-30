@@ -1,6 +1,6 @@
 <template>
   <div class="w-video">
-    <w-modal class="w-file-modal" title="视频播放" v-model:visible="isView" @cancel="cancel">
+    <w-modal class="w-file-modal" title="文本内容" v-model:visible="isView" @cancel="cancel">
       <template #body>
         <span>{{ href }}</span>
       </template>

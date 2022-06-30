@@ -1,9 +1,10 @@
 <template>
   <div class="w-video">
-    <w-modal class="w-file-modal" title="视频播放" v-model:visible="isView" @cancel="cancel">
+    <w-modal class="w-file-modal" title="pdf" v-model:visible="isView" @cancel="cancel">
       <template #body>
         <!-- {{ href }} -->
-        <iframe :src="`http://e.anyoupin.cn/eh3/word/show_docx.php?url=${href}`"></iframe>
+        <!-- <iframe :src="`http://e.anyoupin.cn/eh3/word/show_docx.php?url=${href}`"></iframe> -->
+        暂未开发
       </template>
     </w-modal>
   </div>
