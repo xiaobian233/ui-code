@@ -1,0 +1,58 @@
+{
+  "id": "3492221",
+  "name": "w-ui",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6808504",
+      "name": "Word",
+      "font_class": "Word",
+      "unicode": "edd5",
+      "unicode_decimal": 60885
+    },
+    {
+      "icon_id": "6834866",
+      "name": "文件-文件",
+      "font_class": "wj-wj",
+      "unicode": "e773",
+      "unicode_decimal": 59251
+    },
+    {
+      "icon_id": "17880986",
+      "name": "PDF",
+      "font_class": "PDF",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "663231",
+      "name": "img",
+      "font_class": "i-img",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "1800711",
+      "name": "未知",
+      "font_class": "unknow",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "22755778",
+      "name": "VIDEO",
+      "font_class": "VIDEO",
+      "unicode": "e9f8",
+      "unicode_decimal": 59896
+    },
+    {
+      "icon_id": "29391716",
+      "name": "audio",
+      "font_class": "audio",
+      "unicode": "e950",
+      "unicode_decimal": 59728
+    }
+  ]
+}

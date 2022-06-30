@@ -113,7 +113,7 @@ export default {
 <style lang="scss" scoped>
 .w-pagination {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 .w-pagination-item {

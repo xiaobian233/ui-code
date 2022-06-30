@@ -2,9 +2,7 @@
   <div class="w-video">
     <w-modal class="w-file-modal" title="视频播放" v-model:visible="isView" @cancel="cancel">
       <template #body>
-        <video v-if="fileItem.cmpType === 'video'" :src="href" controls autoplay muted disablePictureInPicture controlsList="nodownload noremoteplayback noplaybackrate">您的浏览器不支持 video 标签</video>
-        <audio v-if="fileItem.cmpType === 'audio'" :src="href" controls autoplay muted disablePictureInPicture controlsList="nodownload noremoteplayback noplaybackrate">您的浏览器不支持 audio 标签</audio>
-        <img v-if="fileItem.cmpType === 'image'" :src="href" alt="您的浏览器不支持 img 标签">
+        <span>{{ href }}</span>
       </template>
     </w-modal>
   </div>
@@ -23,7 +21,7 @@ export default {
         href.value = ev.target.result
         isView.value = true
       }
-      reader.readAsDataURL(props.fileItem)
+      reader.readAsText(props.fileItem)
     })
     const cancel = () => {
       isView.value = false
@@ -37,13 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// audio::-webkit-media-controls-play-button,
-// video::-webkit-media-controls-play-button,
-// audio::-webkit-media-controls-mute-button,
-// video::-webkit-media-controls-mute-button {
-//   width: 26px;
-//   height: 26px;
-// }
 .w-file-modal {
   ::v-deep(.w-modal-banner) {
     width: auto;

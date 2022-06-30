@@ -21,7 +21,7 @@
           <w-menu-item v-for="num  of 5" :key="num" :value="num">{{ num }}</w-menu-item>
         </w-menu>
       </template>
-      <span>Click Me</span>
+      <span>Click Dropdown</span>
     </w-dropdown>
     <br>
     <hr>
@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     change(val, num) {
-      console.error(val, 'emit 触发=====', num)
+      // console.error(val, 'emit 触发=====', num)
     },
   },
 }

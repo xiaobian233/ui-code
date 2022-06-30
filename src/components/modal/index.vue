@@ -49,6 +49,7 @@ export default defineComponent({
     }
     const removeChange = (key) => {
       if (attrs.ok && attrs.ok() == false && key == 'ok') return false
+      emit(key, false)
       emit('update:visible', false)
       attrs.removeMsg && attrs.removeMsg()
     }

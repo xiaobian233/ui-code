@@ -10,6 +10,7 @@ const useModal = function (_app) {
             formModal = null
             render(formModal, dv)
             document.body.removeChild(dv)
+            opt.callback &&  opt.callback()
         }
         formModal = createVNode(modal, { ...opt, removeMsg })
         _app && (formModal.appContext = _app._instance?.appContext)

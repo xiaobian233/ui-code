@@ -2,9 +2,9 @@
   <div class="w-video">
     <w-modal class="w-file-modal" title="视频播放" v-model:visible="isView" @cancel="cancel">
       <template #body>
-        <video v-if="fileItem.cmpType === 'video'" :src="href" controls autoplay muted disablePictureInPicture controlsList="nodownload noremoteplayback noplaybackrate">您的浏览器不支持 video 标签</video>
-        <audio v-if="fileItem.cmpType === 'audio'" :src="href" controls autoplay muted disablePictureInPicture controlsList="nodownload noremoteplayback noplaybackrate">您的浏览器不支持 audio 标签</audio>
-        <img v-if="fileItem.cmpType === 'image'" :src="href" alt="您的浏览器不支持 img 标签">
+        <!-- {{ href }} -->
+        <!-- <iframe :src="`http://e.anyoupin.cn/eh3/word/show_docx.php?url=${href}`"></iframe> -->
+        <span v-html="href"></span>
       </template>
     </w-modal>
   </div>
@@ -20,10 +20,10 @@ export default {
     watchEffect(() => {
       let reader = new FileReader()
       reader.onload = function (ev) {
-        href.value = ev.target.result
-        isView.value = true
+        let res = new Uint8Array(ev.target.result)
+        console.error(res, 'ppppppppppppppppppp');
       }
-      reader.readAsDataURL(props.fileItem)
+      reader.readAsArrayBuffer(props.fileItem)
     })
     const cancel = () => {
       isView.value = false
