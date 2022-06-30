@@ -1,7 +1,10 @@
 <template>
   <div class="w-modal" v-if="visibles">
     <div class="w-modal-mask" @click="removeChange('cancel')"></div>
-    <div class="w-modal-banner" :class="[visibles?'animate__animated animate__zoomIn' : '']">
+    <div
+      class="w-modal-banner"
+      :class="[visibles ? 'animate__animated animate__zoomIn' : '']"
+    >
       <!-- body -->
       <slot name="body">
         <!-- tou -->
@@ -19,9 +22,11 @@
         </div>
         <!-- footer -->
         <slot name="footer">
-          <div class="w-modal-footer">
+          <div class="w-modal-footer" v-if="$attrs.footer != false">
             <w-button class="w-btn" @change="removeChange('cancel')">取消</w-button>
-            <w-button class="w-btn" type="primary" @change="removeChange('ok')">保存</w-button>
+            <w-button class="w-btn" type="primary" @change="removeChange('ok')"
+              >保存</w-button
+            >
           </div>
         </slot>
       </slot>
@@ -30,48 +35,48 @@
 </template>
 
 <script>
-import { computed, nextTick, reactive, toRefs, watchEffect, defineComponent } from 'vue'
+import { computed, nextTick, reactive, toRefs, watchEffect, defineComponent } from "vue";
 export default defineComponent({
-  name: 'w-modal',
+  name: "w-modal",
   props: {
-    title: { type: String, default: '' },
-    visible: { type: Boolean, default: false }
+    title: { type: String, default: "" },
+    visible: { type: Boolean, default: false },
   },
   setup(props, { emit, expose, attrs }) {
-    const data = reactive({ visibles: false })
-    const addStyle = el => {
-      el.style.overflow = 'hidden'
-      el.style.width = 'calc(100% - 17px)'
-    }
-    const removeStyle = el => {
-      el.style.overflow = ''
-      el.style.width = ''
-    }
+    const data = reactive({ visibles: false });
+    const addStyle = (el) => {
+      el.style.overflow = "hidden";
+      el.style.width = "calc(100% - 17px)";
+    };
+    const removeStyle = (el) => {
+      el.style.overflow = "";
+      el.style.width = "";
+    };
     const removeChange = (key) => {
-      if (attrs.ok && attrs.ok() == false && key == 'ok') return false
-      emit(key, false)
-      emit('update:visible', false)
-      attrs.removeMsg && attrs.removeMsg()
-    }
-    const checkTarget = computed(() => data.visibles ? 'click' : '')
+      if (attrs.ok && attrs.ok() == false && key == "ok") return false;
+      emit(key, false);
+      emit("update:visible", false);
+      attrs.removeMsg && attrs.removeMsg();
+    };
+    const checkTarget = computed(() => (data.visibles ? "click" : ""));
     watchEffect(() => {
-      data.visibles = props.visible
+      data.visibles = props.visible;
       nextTick(() => {
-        const body = document.querySelector('body')
-        if (data.visibles) addStyle(body)
-        else removeStyle(body)
-      })
-    })
+        const body = document.querySelector("body");
+        if (data.visibles) addStyle(body);
+        else removeStyle(body);
+      });
+    });
     expose({
       data,
-    })
+    });
     return {
       ...toRefs(data),
       removeChange,
-      checkTarget
-    }
-  }
-})
+      checkTarget,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>

@@ -2,14 +2,12 @@
   <div class="w-video">
     <w-modal
       class="w-file-modal"
-      title="pdf"
+      title="暂未识别"
       v-model:visible="isView"
-      :footer="false"
       @cancel="cancel"
+      :footer="false"
     >
-      <!-- {{ href }} -->
-      <!-- <iframe :src="`http://e.anyoupin.cn/eh3/word/show_docx.php?url=${href}`"></iframe> -->
-      暂未开发
+      暂未识别该文件, 小W在努力学习中...
     </w-modal>
   </div>
 </template>
@@ -24,7 +22,7 @@ export default {
     watchEffect(() => {
       let reader = new FileReader();
       reader.onload = function (ev) {
-        console.error(ev);
+        // let res = new Uint8Array(ev.target.result)
         href.value = ev.target.result;
         isView.value = true;
       };
