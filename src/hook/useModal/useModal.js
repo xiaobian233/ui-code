@@ -1,20 +1,23 @@
-import UseModalJSX from "./useModal"
-import indexs from './index'
-import { createVNode, render } from "vue"
-// console.error(createVNode(indexs), 'UseModalJSX');
-
-export const useModal = function (options) {
-    let formModal
-    const container = document.createElement('div')
-    // const remove = () => {
-    //     formModal = null
-    //     render(null, container)
-    //     container.remove()
-    // }
-    formModal = createVNode(indexs, { ...options, visible: true, title: "2311321" })
-    // // _app && (formModal.appContext = _app._instance?.appContext)
-    // render(formModal, container)
-    // return formModal
-    console.error(indexs, 'UseModalJSX');
-    document.body.appendChild(formModal)
+import { createVNode, render, h, defineComponent, createApp } from "vue"
+import modal from "@/components/modal"
+const useModal = function (_app) {
+    let formModal = null
+    function open(opt) {
+        let dv = document.createElement('div')
+        dv.id = 'w-modal-root'
+        document.body.appendChild(dv)
+        const removeMsg = () => {
+            formModal = null
+            render(formModal, dv)
+            document.body.removeChild(dv)
+        }
+        formModal = createVNode(modal, { ...opt, removeMsg })
+        _app && (formModal.appContext = _app._instance?.appContext)
+        render(formModal, dv)
+        return formModal
+    }
+    return function (opt) {
+        open({ ...opt, visible: true })
+    }
 }
+export default useModal

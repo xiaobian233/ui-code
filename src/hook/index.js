@@ -1,10 +1,10 @@
-import * as useModal from "./useModal/useModal"
+import useModal  from "./useModal/useModal"
 
 
 export default {
     install(app) {
         app.config.globalProperties.$hooks = {
-            ...useModal
+            useModal: useModal(app)
         }
     }
 }

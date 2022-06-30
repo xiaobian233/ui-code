@@ -13,7 +13,9 @@
         </slot>
         <!-- banner -->
         <div class="w-modal-body">
-          <slot />
+          <slot>
+            {{ $attrs.content }}
+          </slot>
         </div>
         <!-- footer -->
         <slot name="footer">
@@ -28,15 +30,14 @@
 </template>
 
 <script>
-import { computed, nextTick, reactive, toRefs, watchEffect, defineComponent } from '@vue/runtime-core'
-// import { modelHook } from '../../hook/modelHook'
+import { computed, nextTick, reactive, toRefs, watchEffect, defineComponent } from 'vue'
 export default defineComponent({
   name: 'w-modal',
   props: {
     title: { type: String, default: '' },
     visible: { type: Boolean, default: false }
   },
-  setup(props, { emit, expose }) {
+  setup(props, { emit, expose, attrs }) {
     const data = reactive({ visibles: false })
     const addStyle = el => {
       el.style.overflow = 'hidden'
@@ -47,7 +48,9 @@ export default defineComponent({
       el.style.width = ''
     }
     const removeChange = (key) => {
+      if (attrs.ok && attrs.ok() == false && key == 'ok') return false
       emit('update:visible', false)
+      attrs.removeMsg && attrs.removeMsg()
     }
     const checkTarget = computed(() => data.visibles ? 'click' : '')
     watchEffect(() => {

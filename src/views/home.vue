@@ -26,7 +26,7 @@
     <br>
     <hr>
     <br>
-    <!-- <w-pagination :total="total" v-model:current="current" v-model:pageSize="pageSize" /> -->
+    <w-pagination :total="total" v-model:current="current" v-model:pageSize="pageSize" />
     <p>值变化: --- {{ current  }} --- {{ pageSize }} --- {{ total }} ---</p>
     <br>
     <hr>
@@ -42,7 +42,7 @@
     <br>
     <w-button @change="visibles = true">click to modal</w-button>
     <w-modal v-model:visible="visibles" title="click to modal" @cancel="sty=>change(sty)" @ok="sty=>change(sty)">
-      12345789
+      click modal
     </w-modal>
     <br>
     <hr>
@@ -55,10 +55,22 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import { getCurrentInstance } from 'vue'
 export default {
   name: 'HomeView',
   components: {
+  },
+  setup() {
+    let { $hooks } = getCurrentInstance().proxy
+    return {
+      changeModal() {
+        $hooks.useModal({
+          title: 'useHook', content: '这是使用hook创建弹框', cancel() { }, ok() {
+            return false
+          }
+        })
+      }
+    }
   },
   data() {
     return {
@@ -74,9 +86,6 @@ export default {
     change(val, num) {
       console.error(val, 'emit 触发=====', num)
     },
-    changeModal() {
-      this.$hooks.useModal()
-    }
   },
 }
 </script>
