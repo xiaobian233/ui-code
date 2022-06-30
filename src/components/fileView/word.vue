@@ -12,29 +12,32 @@
 </template>
 
 <script>
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect } from "vue";
 export default {
   props: { fileItem: { type: Object, default: () => ({}) } },
   setup(props, { emit }) {
-    const href = ref('')
-    const isView = ref(false)
+    const href = ref("");
+    const isView = ref(false);
     watchEffect(() => {
-      let reader = new FileReader()
+      let reader = new FileReader();
       reader.onload = function (ev) {
-        let res = new Uint8Array(ev.target.result)
-        console.error(res, 'ppppppppppppppppppp');
-      }
-      reader.readAsArrayBuffer(props.fileItem)
-    })
+        // let res = new Uint8Array(ev.target.result)
+        href.value = ev.target.result;
+        isView.value = true;
+      };
+      reader.readAsArrayBuffer(props.fileItem);
+    });
     const cancel = () => {
-      isView.value = false
-      emit('change', '')
-    }
+      isView.value = false;
+      emit("change", "");
+    };
     return {
-      href, isView, cancel
-    }
-  }
-}
+      href,
+      isView,
+      cancel,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
