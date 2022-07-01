@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <w-row span="24" @click="change(9)">
-      <w-button type="primary" @change="change(1)"
-        >s
+      <w-button type="primary" @change="change(1)">
         <template #before>
           <span>left</span>
         </template>
@@ -30,42 +29,38 @@
     <w-pagination :total="total" v-model:current="current" v-model:pageSize="pageSize" />
     <p>值变化: --- {{ current }} --- {{ pageSize }} --- {{ total }} ---</p>
     <br />
-    <hr />
-    <br />
-    <w-upload v-model:fileList="files" :change="(file, list) => change(file, list)">
-      <w-button>click to Upload</w-button>
-      <template #fileList="{ fileList, file }">
-        <w-fileView :data="fileList" />
-      </template>
-    </w-upload>
-    <br />
-    <br />
-    <w-upload
-      :drag="true"
-      v-model:fileList="files2"
-      :change="(file, list) => change(file, list)"
-    >
-      <template #fileList="{ fileList: fileListss, file }">
-        <w-fileView :data="files2" />
-      </template>
-    </w-upload>
     <br />
     <hr />
     <br />
-    <w-button @change="visibles = true">click to modal</w-button>
     <br />
+    <w-row>
+      <w-upload v-model:fileList="files" :change="(file, list) => change(file, list)">
+        <w-button>click to Upload</w-button>
+        <template #fileList="{ fileList, file }">
+          <w-fileView :data="fileList" />
+        </template>
+      </w-upload>
+      <w-upload :drag="true" v-model:fileList="files2" :change="(file, list) => change(file, list)">
+        <template #fileList="{ fileList: fileListss, file }">
+          <w-fileView :data="files2" />
+        </template>
+      </w-upload>
+    </w-row>
+
     <br />
-    <w-button @change="changeModal">hooks to modal</w-button>
-    <w-modal
-      v-model:visible="visibles"
-      title="click to modal"
-      @cancel="(sty) => change(sty)"
-      @ok="(sty) => change(sty)"
-    >
-      click modal
-    </w-modal>
     <hr />
+    <br />
+    <w-row>
+      <w-button @change="visibles = true">click to modal</w-button>
+      <w-button @change="changeModal">hooks to modal</w-button>
+    </w-row>
+    <br />
+    <hr />
+    <br />
   </div>
+  <w-modal v-model:visible="visibles" title="click to modal" @cancel="(sty) => change(sty)" @ok="(sty) => change(sty)">
+    click modal
+  </w-modal>
 </template>
 
 <script>
@@ -80,7 +75,7 @@ export default {
         $hooks.useModal({
           title: "useHook",
           content: "这是使用hook创建弹框",
-          cancel() {},
+          cancel() { },
           ok() {
             return false;
           },

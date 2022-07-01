@@ -1,35 +1,17 @@
 <template>
   <div class="w-upload">
     <div v-if="!drag" class="w-upload-file" @click="clickFile(1)">
-      <input
-        ref="fileRef"
-        type="file"
-        :accept="accept"
-        :multiple="multiple"
-        :disabled="disabled"
-        @change="uploadChange"
-      />
+      <input ref="fileRef" type="file" :accept="accept" :multiple="multiple" :disabled="disabled"
+        @change="uploadChange" />
       <!-- // 用户放入标签 -->
       <slot />
     </div>
-    <div
-      ref="dragRef"
-      :style="{
-        'border-color': draghover ? '#008effeb' : '#d9d9d9',
-        'box-shadow': draghover ? '0 0 5px 0px #008effeb' : 'none',
-      }"
-      class="w-upload-drag"
-      v-if="drag"
-      @click="clickFile(2)"
-    >
-      <input
-        ref="fileRef2"
-        type="file"
-        :accept="accept"
-        :multiple="multiple"
-        :disabled="disabled"
-        @change="uploadChange"
-      />
+    <div ref="dragRef" :style="{
+      'border-color': draghover ? '#008effeb' : '#d9d9d9',
+      'box-shadow': draghover ? '0 0 5px 0px #008effeb' : 'none',
+    }" class="w-upload-drag" v-if="drag" @click="clickFile(2)">
+      <input ref="fileRef2" type="file" :accept="accept" :multiple="multiple" :disabled="disabled"
+        @change="uploadChange" />
       <slot name="dragContent">
         <p class="w-upload-drag-title">Click or drag file to this area to upload</p>
         <p class="w-upload-drag-hint">
@@ -52,8 +34,8 @@ export default {
     fileList: { type: Array, default: () => [] },
     maxCount: { type: [Number, String], default: null },
     disabled: { type: Boolean, default: false },
-    beforeUpload: { type: Function, default: () => {} },
-    change: { type: Function, default: () => {} },
+    beforeUpload: { type: Function, default: () => { } },
+    change: { type: Function, default: () => { } },
     accept: { type: String, default: "" },
     multiple: { type: Boolean, default: false },
     drag: { type: Boolean, default: false },
@@ -152,15 +134,21 @@ export default {
 
 <style lang="scss" scoped>
 .w-upload {
+  z-index: 0;
   width: auto;
+  height: 100%;
   display: inline-block;
+
   .w-upload-file {
     cursor: pointer;
+
     input {
       display: none;
     }
   }
+
   .w-upload-drag {
+    z-index: 0;
     box-sizing: border-box;
     padding: 32px;
     cursor: pointer;
@@ -173,19 +161,23 @@ export default {
     border-radius: 2px;
     cursor: pointer;
     transition: border-color 0.3s;
+
     input {
       display: none;
     }
+
     .w-upload-drag-title {
       margin: 0 0 4px;
       color: #000000d9;
       font-size: 16px;
     }
+
     .w-upload-drag-hint {
       color: #00000073;
       font-size: 14px;
     }
   }
+
   .w-upload-list {
     width: 100%;
   }

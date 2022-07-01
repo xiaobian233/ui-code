@@ -111,13 +111,11 @@ export default {
   from {
     opacity: 0;
     transform: translate3d(0, -20px, 0);
-    z-index: -1;
   }
 
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    z-index: 1;
   }
 }
 </style>
