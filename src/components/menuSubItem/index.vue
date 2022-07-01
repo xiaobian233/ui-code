@@ -12,7 +12,7 @@
 <script>
 import emitter from "@/assets/uilt/event";
 export default {
-  name: "w-menu-item",
+  name: "w-menu-sub-item",
   props: ["value", "disabled"],
   methods: {
     menuItemFn() {

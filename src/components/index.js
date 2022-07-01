@@ -3,6 +3,7 @@ import row from './row/index.vue'
 import dropdown from './dropdown/index.vue'
 import menu from './menu/index.vue'
 import menuItem from './menuItem/index.vue'
+import menuSubItem from './menuSubItem/index.vue'
 import pagination from './pagination/index.vue'
 import upload from './upload/index.vue'
 import fileView from './fileView/index.vue'
@@ -16,7 +17,8 @@ let components = [
     pagination,
     upload,
     fileView,
-    modal
+    modal,
+    menuSubItem
 ]
 
 export default {

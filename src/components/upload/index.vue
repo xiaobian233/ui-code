@@ -77,7 +77,7 @@ export default {
     // 上传逻辑处理
     const uploadChange = (e, keyName = "") => {
       let file = {};
-      if (!props.drag && keyName == "drag") {
+      if (props.drag && keyName == "drag") {
         file = e;
       } else {
         file = e.target.files[0];

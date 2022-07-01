@@ -53,6 +53,9 @@
     <hr />
     <br />
     <w-button @change="visibles = true">click to modal</w-button>
+    <br />
+    <br />
+    <w-button @change="changeModal">hooks to modal</w-button>
     <w-modal
       v-model:visible="visibles"
       title="click to modal"
@@ -61,13 +64,7 @@
     >
       click modal
     </w-modal>
-    <br />
     <hr />
-    <br />
-    <w-button @change="changeModal">hooks to modal</w-button>
-    <br />
-    <hr />
-    <br />
   </div>
 </template>
 
