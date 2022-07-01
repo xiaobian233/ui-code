@@ -20,13 +20,7 @@ export default {
     const href = ref("");
     const isView = ref(false);
     watchEffect(() => {
-      let reader = new FileReader();
-      reader.onload = function (ev) {
-        // let res = new Uint8Array(ev.target.result)
-        href.value = ev.target.result;
-        isView.value = true;
-      };
-      reader.readAsArrayBuffer(props.fileItem);
+      isView.value = true;
     });
     const cancel = () => {
       isView.value = false;

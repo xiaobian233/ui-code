@@ -2,10 +2,12 @@
   <div class="w-fileView">
     <template v-for="(v, index) in dataMap" :key="index">
       <div class="w-list-item" @click="targetClick(v, index)">
+        <slot name="before"></slot>
         <div class="w-list-item-file-font">
           <span class="iconfont" :class="v.class"></span>
         </div>
         <div class="w-list-item-file-name">{{ v.name }}</div>
+        <slot name="after"></slot>
       </div>
     </template>
     <w-text
@@ -114,6 +116,7 @@ export default {
   width: 100%;
   flex-wrap: wrap;
   justify-content: flex-start;
+  min-width: 350px;
   width: 100%;
   flex-flow: wrap;
   .w-list-item {
@@ -125,7 +128,6 @@ export default {
     padding: 12px 6px;
     color: #000000d9;
     width: 100%;
-    min-width: 350px;
     background-color: #fff;
     &:hover {
       background-color: #fafafa;

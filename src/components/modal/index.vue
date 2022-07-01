@@ -48,7 +48,7 @@ export default defineComponent({
       el.style.overflow = "hidden";
       el.style.width = "calc(100% - 17px)";
     };
-    const removeStyle = (el) => {
+    const removeStyle = (el = document.querySelector("body")) => {
       el.style.overflow = "";
       el.style.width = "";
     };
@@ -56,6 +56,7 @@ export default defineComponent({
       if (attrs.ok && attrs.ok() == false && key == "ok") return false;
       emit(key, false);
       emit("update:visible", false);
+      removeStyle();
       attrs.removeMsg && attrs.removeMsg();
     };
     const checkTarget = computed(() => (data.visibles ? "click" : ""));
