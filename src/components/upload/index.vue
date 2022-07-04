@@ -134,7 +134,7 @@ export default {
 
 <style lang="scss" scoped>
 .w-upload {
-  z-index: 0;
+  z-index: auto;
   width: auto;
   height: 100%;
   display: inline-block;
@@ -148,7 +148,7 @@ export default {
   }
 
   .w-upload-drag {
-    z-index: 0;
+    z-index: auto;
     box-sizing: border-box;
     padding: 32px;
     cursor: pointer;

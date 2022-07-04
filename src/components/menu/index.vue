@@ -5,27 +5,27 @@
 </template>
 
 <script>
-import emitter from "@/assets/uilt/event";
+import emitter from '@/assets/uilt/event'
 export default {
-  name: "w-menu",
+  name: 'w-menu',
   methods: {
     change(val) {
-      this.$emit("change", val);
-      this.$parent["dropdown-close"] && this.$parent["dropdown-close"]();
-    },
+      this.$emit('change', val)
+      this.$parent['dropdown-close'] && this.$parent['dropdown-close']()
+    }
   },
   mounted() {
-    emitter.on("menuItem", (obj) => {
+    emitter.on('menuItem', obj => {
       if (obj.parent === this) {
-        this.change(obj.value);
+        this.change(obj.value)
       }
-    });
+    })
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-.w-menu {
+.w-menu{
   width: 100%;
 }
 </style>

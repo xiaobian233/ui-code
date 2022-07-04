@@ -15,14 +15,25 @@
     <br />
     <hr />
     <br />
-    <w-dropdown>
-      <template #content>
+    <w-row>
+      <w-dropdown>
+        <template #content>
+          <w-menu @change="(num) => change('menu', num)">
+            <w-menu-item v-for="num of 5" :key="num" :value="num">{{ num }}</w-menu-item>
+          </w-menu>
+        </template>
+        <span>Click Dropdown</span>
+      </w-dropdown>
+      <div style="width:300px;">
         <w-menu @change="(num) => change('menu', num)">
           <w-menu-item v-for="num of 5" :key="num" :value="num">{{ num }}</w-menu-item>
+          <w-menu-sub-item>
+            <template #title> 二级下拉 </template>
+            <w-menu-item v-for="num of 5" :key="num" :value="num">{{ num }}</w-menu-item>
+          </w-menu-sub-item>
         </w-menu>
-      </template>
-      <span>Click Dropdown</span>
-    </w-dropdown>
+      </div>
+    </w-row>
     <br />
     <hr />
     <br />

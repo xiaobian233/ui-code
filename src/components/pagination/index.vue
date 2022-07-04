@@ -30,7 +30,7 @@ import { computed, reactive, toRefs, watch } from 'vue'
 import dropdown from '@/components/dropdown/index.vue'
 import menu from '@/components/menu/index.vue'
 import button from '@/components/button/index.vue'
-import menuItem from '@/components/menuItem/index.vue'
+import menuItem from '@/components/menu/menuItem/index.vue'
 export default {
   components: { [dropdown.name]: dropdown, [menu.name]: menu, [menuItem.name]: menuItem, [button.name]: button, },
   name: 'w-pagination',

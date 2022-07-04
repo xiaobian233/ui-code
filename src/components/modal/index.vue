@@ -1,10 +1,7 @@
 <template>
   <div class="w-modal" v-if="visibles">
     <div class="w-modal-mask" @click="removeChange('cancel')"></div>
-    <div
-      class="w-modal-banner"
-      :class="[visibles ? 'animate__animated animate__zoomIn' : '']"
-    >
+    <div class="w-modal-banner" :class="[visibles ? 'animate__animated animate__zoomIn' : '']">
       <!-- body -->
       <slot name="body">
         <!-- tou -->
@@ -24,9 +21,7 @@
         <slot name="footer">
           <div class="w-modal-footer" v-if="$attrs.footer != false">
             <w-button class="w-btn" @change="removeChange('cancel')">取消</w-button>
-            <w-button class="w-btn" type="primary" @change="removeChange('ok')"
-              >保存</w-button
-            >
+            <w-button class="w-btn" type="primary" @change="removeChange('ok')">保存</w-button>
           </div>
         </slot>
       </slot>
@@ -61,12 +56,10 @@ export default defineComponent({
     };
     const checkTarget = computed(() => (data.visibles ? "click" : ""));
     watchEffect(() => {
-      data.visibles = props.visible;
-      nextTick(() => {
-        const body = document.querySelector("body");
-        if (data.visibles) addStyle(body);
-        else removeStyle(body);
-      });
+      const body = document.querySelector("body");
+      if (props.visible) addStyle(body);
+      else removeStyle(body);
+      nextTick(() => data.visibles = props.visible)
     });
     expose({
       data,
@@ -91,6 +84,7 @@ export default defineComponent({
   height: 100%;
   background-color: #00000073;
 }
+
 .w-modal-banner {
   position: absolute;
   background-color: #fff;
@@ -106,6 +100,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 520px;
 }
+
 .w-modal-header {
   padding: 16px 24px;
   color: #000000d9;
@@ -113,6 +108,7 @@ export default defineComponent({
   border-bottom: 1px solid #f0f0f0;
   border-radius: 2px 2px 0 0;
   position: relative;
+
   .w-modal-title {
     margin: 0;
     color: #000000d9;
@@ -121,6 +117,7 @@ export default defineComponent({
     line-height: 22px;
     word-wrap: break-word;
   }
+
   .w-modal-close {
     display: inline-block;
     position: absolute;
@@ -147,17 +144,20 @@ export default defineComponent({
     text-rendering: auto;
   }
 }
+
 .w-modal-footer {
   padding: 10px 16px;
   text-align: right;
   background: transparent;
   border-top: 1px solid #f0f0f0;
   border-radius: 0 0 2px 2px;
+
   .w-btn:nth-child(1) {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
+
 .w-modal-body {
   padding: 24px;
   font-size: 14px;
