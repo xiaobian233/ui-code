@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2076262",
+      "name": "目录",
+      "font_class": "mulu",
+      "unicode": "e890",
+      "unicode_decimal": 59536
+    },
+    {
+      "icon_id": "672036",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "6805509",
+      "name": "Word",
+      "font_class": "Word1",
+      "unicode": "e99a",
+      "unicode_decimal": 59802
+    },
+    {
+      "icon_id": "18991699",
+      "name": "pdf",
+      "font_class": "pdf",
+      "unicode": "e86e",
+      "unicode_decimal": 59502
+    },
+    {
       "icon_id": "6808504",
       "name": "Word",
       "font_class": "Word",

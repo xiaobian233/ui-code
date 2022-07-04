@@ -1,20 +1,12 @@
 <template>
-  <div
-    class="w-dropdown"
-    v-checkOutDom:[trigger]="checkOut"
-    @click="clickOrHover('click')"
-    @mouseenter="clickOrHover('hover')"
-  >
+  <div class="w-dropdown" v-checkOutDom:[trigger]="checkOut" @click="clickOrHover('click')"
+    @mouseenter="clickOrHover('hover')">
     <div class="w-dropdown-title" ref="wDropdownTitle">
       <slot />
     </div>
-    <div
-      ref="dropdownContent"
-      class="w-dropdown-content"
-      :class="isCont ? 'animate__fadeInDown' : 'animate__animated animate__fadeOut'"
-      :style="styleContent"
-      v-if="isCont"
-    >
+    <div ref="dropdownContent" class="w-dropdown-content"
+      :class="isCont ? 'animate__fadeInDown' : 'animate__animated animate__fadeOut'" :style="styleContent"
+      v-if="isCont">
       <slot name="content" />
     </div>
   </div>
@@ -73,6 +65,7 @@ export default {
 .w-dropdown {
   position: relative;
 }
+
 .w-dropdown-content::before {
   content: "";
   display: inline-block;
@@ -83,6 +76,7 @@ export default {
   left: 0;
   background: transparent;
 }
+
 .w-dropdown-content {
   z-index: 99;
   margin-top: 4px;
@@ -91,7 +85,6 @@ export default {
   background-clip: padding-box;
   border-radius: 2px;
   box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
-  padding: 8px;
   box-sizing: border-box;
 }
 
@@ -101,12 +94,14 @@ export default {
   cursor: pointer;
   color: $wang-primary-color;
 }
+
 .animate__fadeInDown {
   animation-name: fadeInDown;
   animation-duration: 1s;
   animation-duration: var(--animate-duration);
   animation-fill-mode: both;
 }
+
 @keyframes fadeInDown {
   from {
     opacity: 0;

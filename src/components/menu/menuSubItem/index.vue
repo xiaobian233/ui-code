@@ -1,13 +1,16 @@
 <template>
-  <div class="w-menu-sub-item" :class="disabled ? 'disabled' : ''" :disabled="disabled">
+  <div class="w-menu-sub-item" :class="disabled ? 'disabled' : ''">
     <div class="w-menu-sub-title" @click="clickHeight">
-      <slot name="title"></slot>
-      <slot name="icon">{{ isHeight }}</slot>
+      <span class="title-before-icon">
+        <slot name="beforeIcon"> <i class="iconfont icon-mulu"></i> </slot>
+      </span>
+      <slot name="title" />
+      <span class="title-after-icon">
+        <slot name="afterIcon"><i class="iconfont icon-xiala" :class="{ 'checked': isHeight }"></i></slot>
+      </span>
     </div>
     <div class="w-menu-sub-content" :style="{ height: heightPx + 'px' }" ref="wMenuSubContent">
-      <div v-if="isHeight">
-        <slot></slot>
-      </div>
+      <slot v-if="isHeight"></slot>
     </div>
   </div>
 </template>
@@ -50,24 +53,48 @@ export default {
 .w-menu-sub-item {
   cursor: pointer;
   height: auto;
-  padding: 0 6px;
-  background-color: #fff;
   overflow: hidden;
 
   .w-menu-sub-title {
     height: 36px;
     line-height: 36px;
+    padding: 0 6px;
+    vertical-align: middle;
+    color: #fff;
 
     &:hover {
-      background-color: #f0f0f0;
+      background-color: #1890ff;
+    }
+
+    .title-before-icon {
+      margin-right: 8px;
+    }
+
+    .title-after-icon {
+      float: right;
+      position: relative;
+
+      i {
+        transform: rotate(0);
+        position: absolute;
+        top: 0;
+        left: -16px;
+        transition: all 0.3s;
+
+        &.checked {
+          transform: rotate(180deg);
+        }
+      }
     }
   }
 
   .w-menu-sub-content {
     height: 0;
-    transition: all 0.6s;
-    padding: 0 8px;
+    transition: all 0.3s;
+    padding: 0 6px;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .disabled {

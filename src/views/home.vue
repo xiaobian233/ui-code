@@ -24,11 +24,18 @@
         </template>
         <span>Click Dropdown</span>
       </w-dropdown>
-      <div style="width:300px;">
+      <div style="width:300px;margin-left:16px;">
         <w-menu @change="(num) => change('menu', num)">
-          <w-menu-item v-for="num of 5" :key="num" :value="num">{{ num }}</w-menu-item>
           <w-menu-sub-item>
-            <template #title> 二级下拉 </template>
+            <template #title> #1下拉 </template>
+            <w-menu-item v-for="num of 5" :key="num" :value="num">{{ num }}</w-menu-item>
+          </w-menu-sub-item>
+          <w-menu-sub-item>
+            <template #title> #2下拉 </template>
+            <w-menu-item v-for="num of 5" :key="num" :value="num">{{ num }}</w-menu-item>
+          </w-menu-sub-item>
+          <w-menu-sub-item>
+            <template #title> #3下拉 </template>
             <w-menu-item v-for="num of 5" :key="num" :value="num">{{ num }}</w-menu-item>
           </w-menu-sub-item>
         </w-menu>
