@@ -1,3 +1,4 @@
+import emitter from "@/assets/uilt/event";
 import button from './button/index.vue'
 import row from './row/index.vue'
 import dropdown from './dropdown/index.vue'

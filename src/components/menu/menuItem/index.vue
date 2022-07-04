@@ -1,38 +1,44 @@
 <template>
-  <div class="w-menu-item" ref="wMenuItem" :class="disabled ? 'disabled' : ''" @click="menuItemFn">
+  <div class="w-menu-item" ref="wMenuItem" :class="[disabled ? 'disabled' : '', valueBol ? 'check' : '']"
+    @click="menuItemFn">
     <slot></slot>
+    {{ valueBol }}
   </div>
 </template>
 
 <script>
-import emitter from "@/assets/uilt/event";
 export default {
   name: "w-menu-item",
   props: {
     disabled: { type: Boolean },
     value: '',
   },
+  inject: ['_el', '_elSub'],
+  data: () => ({
+    valueBol: false
+  }),
   methods: {
     menuItemFn() {
-      if (this.disabled) return false;
-      emitter.emit("menuItem", { value: this.value, ev: this.$el, parent: this.$parent });
-    },
-  },
-  created() {
-    emitter.on('menuParent', obj => {
-      if (obj.el.contains(this.$el)) {
+      if (this._el.dropdownBol) this._el.change(this.value)
+      else {
+        let checkKey = this._el.checkKey
+        checkKey = [this.value]
+        this._el.setValue({ checkKey, openKey: this._el.openKey })
         this.$nextTick(() => {
-          if ('style' in obj) {
-            Object.assign(this.$refs.wMenuItem.style, obj.style)
-          }
-          if ('class' in obj) {
-            obj.class.map(x => {
-              this.$refs.wMenuItem.className = `${this.$refs.wMenuItem.className} ${x}`
-            })
-          }
+          this._elSub.init(true)
+          this.init()
         })
       }
-    })
+    },
+    init() {
+      this.$nextTick(() => {
+        this._elSub.bol && (this.valueBol = this._el.checkKey.some(key => (key == this.value)))
+        this._el.dropdownBol && (this.$refs.wMenuItem.className = `${this.$refs.wMenuItem.className} colorCheck color`)
+      })
+    }
+  },
+  created() {
+    this.init()
   },
 };
 </script>
@@ -45,6 +51,14 @@ export default {
   padding: 0 6px;
   transition: background 0.3s;
   color: #fff;
+
+  &.colorCheck {
+    color: #000;
+  }
+
+  &.check {
+    background-color: #1890ff;
+  }
 }
 
 .w-menu-item:hover {
@@ -53,6 +67,8 @@ export default {
   &.color:hover {
     background-color: #f0f0f0;
   }
+
+
 }
 
 .disabled {

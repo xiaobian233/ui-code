@@ -1,6 +1,6 @@
 <template>
   <div class="w-menu-sub-item" :class="disabled ? 'disabled' : ''">
-    <div class="w-menu-sub-title" @click="clickHeight">
+    <div class="w-menu-sub-title" @click="clickHeight()">
       <span class="title-before-icon">
         <slot name="beforeIcon"> <i class="iconfont icon-mulu"></i> </slot>
       </span>
@@ -16,35 +16,51 @@
 </template>
 
 <script>
-import emitter from "@/assets/uilt/event";
 export default {
   name: "w-menu-sub-item",
   props: ["value", "disabled"],
   data: () => ({
     isHeight: false,
-    heightPx: 0
+    heightPx: 0,
+    parentObj: {},
+    bol: false
   }),
+  inject: ['_el'],
+  provide() {
+    return {
+      _elSub: this,
+    }
+  },
   methods: {
     menuItemFn(value) {
       if (this.disabled) return false;
-      emitter.emit("menuItem", { value: value, ev: this.$el, parent: this.$parent });
+      Ev.emit("menuItem", { value: value, ev: this.$el, parent: this.$parent });
     },
-    clickHeight() {
+    clickHeight(bols = false) {
+      let openKey = this._el.openKey
       this.isHeight = !this.isHeight
-      if (!this.isHeight) this.heightPx = 0
+      if (!this.isHeight) {
+        this.heightPx = 0
+        let index = openKey.findIndex(x => (this.value == x))
+        index != -1 ? openKey.splice(index, 1) : null
+      }
       else {
+        openKey = [...openKey, this.value]
         this.$nextTick(() => {
           this.heightPx = this.$refs.wMenuSubContent.children.length * this.$refs.wMenuSubContent.children[0].offsetHeight
+          Ev.emit("subOpenCheck", this.parentObj)
         })
       }
+      if (!bols) this._el.setValue({ openKey: [...new Set(openKey)], checkKey: this._el.checkKey })
     },
+    init(bols = false) {
+      let { _el } = this
+      this.bol = _el.openKey.some(key => (key == this.value))
+      if (this.bol && !bols) this.clickHeight(true)
+    }
   },
-  mounted() {
-    emitter.on("menuItem", (obj) => {
-      if (obj.parent === this) {
-        this.menuItemFn(obj.value);
-      }
-    });
+  created() {
+    this.init()
   },
 };
 </script>
@@ -63,7 +79,7 @@ export default {
     color: #fff;
 
     &:hover {
-      background-color: #1890ff;
+      text-shadow: 0 0 3px #cfe2f3;
     }
 
     .title-before-icon {

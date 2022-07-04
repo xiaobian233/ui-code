@@ -5,45 +5,41 @@
 </template>
 
 <script>
-import emitter from '@/assets/uilt/event'
-import { Ev } from '@/assets/uilt/event'
 export default {
   props: {
-    'backgroundColor': { type: String, default: "#000000d9" },
+    backgroundColor: { type: String, default: "#000000d9" },
+    openKey: { type: Array, default: [] },
+    checkKey: { type: Array, default: [] },
   },
   name: 'w-menu',
-  data: () => ({
-    backgroundColors: ""
-  }),
-  methods: {
-    change(val) {
-      this.$emit('change', val)
-      this.$parent['dropdown-close'] && this.$parent['dropdown-close']()
-    },
-    checkItem() {
-      // 判断是否为 dropdown 组件
-      if (typeof this.$parent['dropdown-close'] == 'function') {
-        this.backgroundColors = '#ffffff'
-        emitter.emit('menuParent', {
-          style: {
-            color: '#000000'
-          },
-          class: ['color'],
-          el: this.$el
-        })
-      }
-
-      Ev.$emit('sss',456)
+  provide() {
+    return {
+      _el: this
     }
   },
+  inject: ['_drop'],
+  data: () => ({
+    backgroundColors: "",
+    dropdownBol: false
+  }),
+  methods: {
+    setValue({ openKey = [], checkKey = [] }) {
+      this.$emit('change', {
+        openKey,
+        checkKey
+      })
+      this.$emit('update:openKey', openKey)
+      this.$emit('update:checkKey', checkKey)
+    },
+    change(val) {
+      this.$emit('change', val)
+      this._drop && this._drop.checkOut()
+    },
+  },
   mounted() {
-    emitter.on('menuItem', obj => {
-      if (obj.parent === this) {
-        this.change(obj.value)
-      }
-    })
+    this.dropdownBol = this._drop ? true : false
     this.backgroundColors = this.backgroundColor
-    this.checkItem()
+    if (this.dropdownBol) this.backgroundColors = "#fff"
   },
 }
 </script>

@@ -20,6 +20,11 @@ export default {
     trigger: { type: String, default: "click" },
     disabled: { type: [String, Boolean], default: false },
   },
+  provide() {
+    return {
+      _drop: this
+    }
+  },
   setup(props, { expose }) {
     const wDropdownTitle = ref(null);
     const data = reactive({
