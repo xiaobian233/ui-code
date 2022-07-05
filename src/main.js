@@ -6,6 +6,5 @@ import '@/assets/css/reset.scss'
 import 'animate.css'
 import "@/assets/font/iconfont.css"
 import uiSDK from '@/components/index'
-import hooks from "@/hook"
-const app = createApp(App).use(store).use(router).use(uiSDK).use(hooks).mount('#app')
+const app = createApp(App).use(store).use(router).use(uiSDK).mount('#app')
 window.vm = app

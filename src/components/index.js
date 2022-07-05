@@ -1,5 +1,6 @@
 import emitter from "@/assets/uilt/directive/event";
 import directives from '@/assets/uilt'
+import hooks from "@/hook"
 import button from './button/index.vue'
 import row from './row/index.vue'
 import dropdown from './dropdown/index.vue'
@@ -29,6 +30,7 @@ let components = [
 export default {
     install(app) {
         app.use(directives)
+        app.use(hooks)
         components.map(x => app.component(x.name, x))
     }
 }
