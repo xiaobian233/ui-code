@@ -1,5 +1,5 @@
-import emitter from "@/assets/uilt/event";
-import directives from '@/assets/uilt/directive'
+import emitter from "@/assets/uilt/directive/event";
+import directives from '@/assets/uilt'
 import button from './button/index.vue'
 import row from './row/index.vue'
 import dropdown from './dropdown/index.vue'

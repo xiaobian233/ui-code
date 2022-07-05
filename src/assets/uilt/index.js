@@ -1,5 +1,5 @@
-import checkout from "./checkout"
-import money from "./money"
+import checkout from "./directive/checkout"
+import money from "./directive/money"
 
 const directives = { checkout, money }
 export default {
