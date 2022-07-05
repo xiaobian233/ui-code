@@ -103,7 +103,7 @@ export default {
       visibles: false,
       openKey: [2],
       checkKey: [8],
-      inpuValue: 911.19,
+      inpuValue: 91123.1,
 
     };
   },

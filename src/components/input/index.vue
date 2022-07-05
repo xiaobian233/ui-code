@@ -3,8 +3,8 @@
         <span>
             <slot name="before">{{ before }}</slot>
         </span>
-        <input v-money="{ money, moneyInit, valueClick, values, flot }" v-model="values" @input="inputChange"
-            @keydown="inputKeyDown" class="w-input" type="text">
+        <input v-money="{ isTarget: money && moneyInit, valueClick, values, flot }" v-model="values"
+            @input="inputChange" @keydown="inputKeyDown" class="w-input" type="text">
         <span>
             <slot name="after">{{ after }}</slot>
         </span>

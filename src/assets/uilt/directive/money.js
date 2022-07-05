@@ -21,8 +21,8 @@ const elMousedown = (el, binding) => {
 
 export default {
     mounted(el, binding) {
-        let { money, moneyInit } = binding.value
-        if (money && moneyInit) {
+        let { isTarget } = binding.value
+        if (isTarget) {
             nextTick(() => {
                 el.value = numberToStr(el.value, binding.value.flot)
                 el.addEventListener('focus', elFocus(el, binding))
