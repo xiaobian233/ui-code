@@ -1,5 +1,5 @@
 <template>
-  <div class="w-dropdown" v-checkOutDom:[trigger]="checkOut" @click="clickOrHover('click')"
+  <div class="w-dropdown" v-checkout:[trigger]="checkOut" @click="clickOrHover('click')"
     @mouseenter="clickOrHover('hover')">
     <div class="w-dropdown-title" ref="wDropdownTitle">
       <slot />
