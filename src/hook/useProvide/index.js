@@ -5,7 +5,7 @@ const useTreeProvide = (obj) => {
     provide(treeKey, obj)
 }
 const useTreeInject = () => {
-    inject(treeKey)
+    return inject(treeKey)
 }
 
 export default {

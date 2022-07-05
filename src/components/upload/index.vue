@@ -40,7 +40,7 @@ export default {
     multiple: { type: Boolean, default: false },
     drag: { type: Boolean, default: false },
   },
-  setup(props, { emit, expose }) {
+  setup(props, { emit, expose, attrs }) {
     const data = reactive({
       fileLists: [],
       draghover: false,
@@ -80,10 +80,12 @@ export default {
         // 失败时
         data.fileLists = data.fileLists.slice(0, -1);
         props.change({ file, status: "error" }, data.fileLists);
+        attrs.remove && attrs.remove()
         return false;
       }
       // 成功后
       props.change({ file, status: "succeed" }, data.fileLists);
+      attrs.remove && attrs.remove()
       // 调用成功后 初始化value值
       nextTick(() => {
         fileRef.value && (fileRef.value.value = "");
@@ -116,7 +118,9 @@ export default {
     expose({ clickFile });
     // 监听值的变化
     watchEffect(() => {
+      if (attrs.check) nextTick(() => clickFile(1))
       data.fileLists = props.fileList;
+
     });
     onMounted(() => nextTick(dropFile));
     return {

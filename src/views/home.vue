@@ -57,6 +57,7 @@
           <w-fileView :data="files2" />
         </template>
       </w-upload>
+      <w-button @change="changeUpload">hook to Upload</w-button>
     </w-row>
     <hr />
     <w-row>
@@ -91,6 +92,13 @@ export default {
           footer: false
         });
       },
+      changeUpload() {
+        $hooks.useUpload({
+          change(file) {
+            console.error(file, 'file');
+          }
+        })
+      }
     };
   },
   data() {
