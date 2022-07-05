@@ -11,7 +11,7 @@
         </template>
       </w-button>
       <w-button :disabled="true" @change="change(0)">按钮button2</w-button>
-      <w-input money="true"  :max="999999999999" v-model:value="inpuValue" before="￥" after="RMB" />{{ inpuValue }}
+      <w-input money="true" :max="999999999999" v-model:value="inpuValue" before="￥" after="RMB" />{{ inpuValue }}
     </w-row>
     <hr />
     <w-row>
@@ -88,6 +88,7 @@ export default {
           ok() {
             return false;
           },
+          footer: false
         });
       },
     };
