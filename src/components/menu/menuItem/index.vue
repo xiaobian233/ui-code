@@ -24,7 +24,7 @@ export default {
         checkKey = [this.value]
         this._el.setValue({ checkKey, openKey: this._el.openKey }, () => {
           this._elSub.init(true)
-          this.init()
+          this.$nextTick(this.init)
         })
       }
     },

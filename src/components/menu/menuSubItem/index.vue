@@ -47,10 +47,7 @@ export default {
       }
       else {
         openKey = [...openKey, this.value]
-        this.$nextTick(() => {
-          this.heightPx = this.$refs.wMenuSubContent.children.length * this.$refs.wMenuSubContent.children[0].offsetHeight
-          Ev.emit("subOpenCheck", this.parentObj)
-        })
+        this.$nextTick(() => { this.heightPx = this.$refs.wMenuSubContent.children.length * this.$refs.wMenuSubContent.children[0].offsetHeight })
       }
       if (!bols) this._el.setValue({ openKey: [...new Set(openKey)], checkKey: this._el.checkKey })
     },
@@ -58,6 +55,9 @@ export default {
       let { _el } = this
       this.bol = _el.openKey.some(key => (key == this.value))
       if (this.bol && !bols) this.clickHeight(true)
+      if (bols){
+        console.error(this.$refs.wMenuSubContent, 'this.$refs.wMenuSubContent');
+      }
     }
   },
   created() {
