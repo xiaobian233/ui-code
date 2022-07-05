@@ -24,7 +24,7 @@
         </template>
         <span>Click Dropdown</span>
       </w-dropdown>
-      <div style="width:300px;margin-left:16px;">
+      <!-- <div style="width:300px;margin-left:16px;">
         <j-menu>
           <j-menuSub key="1">
             <j-menuItem key="1-1"> 1 - 1 </j-menuItem>
@@ -32,9 +32,8 @@
             <j-menuItem key="1-3"> 1 - 3 </j-menuItem>
           </j-menuSub>
         </j-menu>
-
-      </div>
-      <div style="width:300px;margin-left:16px;display:none">
+      </div> -->
+      <div style="width:300px;margin-left:16px;">
         openKey: {{ openKey }} ============ checkKey: {{ checkKey }}
         <w-menu v-model:openKey="openKey" v-model:checkKey="checkKey" @change="(num) => change('menu', num)">
           <w-menu-sub-item :value="1">
