@@ -3,24 +3,37 @@
     <div class="w-pagination-title" v-html="getTotalTitle"></div>
     <div class="w-pagination-button">
       <span @click="clickTop(--pageCurrent)" class="w-pagination-item">&lt;</span>
-      <span v-if="pageCurrent >=constNumber && pageTotal !=constNumber" @click="clickTop(1)" class="w-pagination-item">1</span>
-      <span v-if="pageCurrent >= constNumber && pageTotal != constNumber" @click="clickTop(pageCurrent-constNumber)" class="w-pagination-item">•••</span>
+      <span v-if="pageCurrent >= constNumber && pageTotal != constNumber" @click="clickTop(1)"
+        class="w-pagination-item">1</span>
+      <span v-if="pageCurrent >= constNumber && pageTotal != constNumber" @click="clickTop(pageCurrent - constNumber)"
+        class="w-pagination-item">•••</span>
       <template v-for="index in pageTotal" :key="index">
-        <span @click="clickTop(index)" :class="[pageCurrent === index ? 'w-pagination-item-active':'']" v-if="getItem(index)" class="w-pagination-item">{{index}}</span>
+        <span @click="clickTop(index)" :class="[pageCurrent == index ? 'w-pagination-item-active' : '']"
+          v-if="getItem(index)" class="w-pagination-item">{{ index }}</span>
       </template>
-      <span v-if="pageCurrent+constNumber <= pageTotal" @click="clickTop(pageCurrent+constNumber)" class="w-pagination-item">•••</span>
-      <span v-if="pageCurrent+constNumber <= pageTotal" @click="clickTop(pageTotal)" class="w-pagination-item">{{ pageTotal }}</span>
+      <span v-if="pageCurrent + constNumber <= pageTotal" @click="clickTop(pageCurrent + constNumber)"
+        class="w-pagination-item">•••</span>
+      <span v-if="pageCurrent + constNumber <= pageTotal" @click="clickTop(pageTotal)" class="w-pagination-item">{{
+          pageTotal
+      }}</span>
       <span @click="clickTop(++pageCurrent)" class="w-pagination-item">></span>
     </div>
     <div class="w-pagination-select">
       <w-dropdown :disabled="disabled" trigger="hover">
         <template #content>
-          <w-menu @change="num=>menuChange(num)">
-            <w-menu-item :disabled="disabled" v-for="page  of wPageSizeOptions" :key="page" :value="page">{{ page }}条</w-menu-item>
+          <w-menu @change="num => menuChange(num)">
+            <w-menu-item :disabled="disabled" v-for="page  of wPageSizeOptions" :key="page" :value="page">{{ page }}条
+            </w-menu-item>
           </w-menu>
         </template>
         <w-button type="primary" :disabled="disabled" style="width:120px">{{ pageSize }}条/页</w-button>
       </w-dropdown>
+    </div>
+    <div class="w-pagination-page">
+      <span>跳至</span>
+      <w-input :flot="0" :money="true" :max="pageTotal" :moneyInit="false" v-model:value="pageValue"
+        @Search="clickTop(Number(pageValue)), pageValue = ''" />
+      <span>页</span>
     </div>
   </div>
 </template>
@@ -43,7 +56,7 @@ export default {
     totalTitle: { type: [String, Function], default: '' }
   },
   setup(props, { emit }) {
-    const data = reactive({ pages: [], pageTotal: 0, pageQuota: 6, pagMaxTotal: 0, pageSizeOptions: [], constNumber: 5 })
+    const data = reactive({ pages: [], pageTotal: 0, pageQuota: 6, pagMaxTotal: 0, pageSizeOptions: [], constNumber: 5, pageValue: '' })
     const init = (obj) => {
       Object.assign(data, { pageCurrent: obj.current, pageSize: obj.pageSize, total: obj.total, wPageSizeOptions: obj.pageSizeOptions })
       data.pageTotal = Math.ceil(data.total / data.pageSize);
@@ -116,6 +129,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
 }
+
 .w-pagination-item {
   display: inline-block;
   min-width: 32px;
@@ -137,6 +151,7 @@ export default {
   -moz-user-select: none;
   user-select: none;
 }
+
 .w-pagination-item-active,
 .w-pagination-item:hover {
   font-weight: 500;
@@ -144,6 +159,7 @@ export default {
   border-color: $wang-primary-color;
   color: $wang-primary-color;
 }
+
 .w-pagination-title {
   box-sizing: border-box;
   margin: 0;
@@ -155,5 +171,23 @@ export default {
   list-style: none;
   font-feature-settings: 'tnum';
   margin-right: 8px;
+}
+
+.w-pagination-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 8px;
+
+  .w-input-wrapper {
+    min-width: 32px;
+    height: 32px;
+    width: 48px;
+    margin: 0 8px;
+
+    ::v-deep(.w-input) {
+      text-align: center;
+    }
+  }
 }
 </style>

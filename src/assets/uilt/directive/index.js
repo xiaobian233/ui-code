@@ -1,6 +1,7 @@
 import checkOutDom from "./checkOutDom"
+import money from "./money"
 
-const directives = { checkOutDom }
+const directives = { checkOutDom, money }
 export default {
     install(app) {
         Object.entries(directives).map(x => {

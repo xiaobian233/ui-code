@@ -1,4 +1,5 @@
 import emitter from "@/assets/uilt/event";
+import directives from '@/assets/uilt/directive'
 import button from './button/index.vue'
 import row from './row/index.vue'
 import dropdown from './dropdown/index.vue'
@@ -9,6 +10,7 @@ import pagination from './pagination/index.vue'
 import upload from './upload/index.vue'
 import fileView from './fileView/index.vue'
 import modal from './modal/index.vue'
+import input from './input/index.vue'
 
 let components = [
     button,
@@ -21,10 +23,12 @@ let components = [
     fileView,
     modal,
     menuSubItem,
+    input
 ]
 
 export default {
     install(app) {
+        app.use(directives)
         components.map(x => app.component(x.name, x))
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <w-row span="24" @click="change(9)">
+    <w-row span="24">
       <w-button type="primary" @change="change(1)">
         <template #before>
           <span>left</span>
@@ -11,10 +11,9 @@
         </template>
       </w-button>
       <w-button :disabled="true" @change="change(0)">按钮button2</w-button>
+      <w-input money="true"  :max="999999999999" v-model:value="inpuValue" before="￥" after="RMB" />{{ inpuValue }}
     </w-row>
-    <br />
     <hr />
-    <br />
     <w-row>
       <w-dropdown>
         <template #content>
@@ -42,16 +41,10 @@
         </w-menu>
       </div>
     </w-row>
-    <br />
     <hr />
-    <br />
     <w-pagination :total="total" v-model:current="current" v-model:pageSize="pageSize" />
     <p>值变化: --- {{ current }} --- {{ pageSize }} --- {{ total }} ---</p>
-    <br />
-    <br />
     <hr />
-    <br />
-    <br />
     <w-row>
       <w-upload v-model:fileList="files" :change="(file, list) => change(file, list)">
         <w-button>click to Upload</w-button>
@@ -65,21 +58,18 @@
         </template>
       </w-upload>
     </w-row>
-
-    <br />
     <hr />
-    <br />
     <w-row>
       <w-button @change="visibles = true">click to modal</w-button>
       <w-button @change="changeModal">hooks to modal</w-button>
+      <w-modal v-model:visible="visibles" title="click to modal" @cancel="(sty) => change(sty)"
+        @ok="(sty) => change(sty)">
+        click modal
+      </w-modal>
     </w-row>
-    <br />
     <hr />
-    <br />
   </div>
-  <w-modal v-model:visible="visibles" title="click to modal" @cancel="(sty) => change(sty)" @ok="(sty) => change(sty)">
-    click modal
-  </w-modal>
+
 </template>
 
 <script>
@@ -112,7 +102,9 @@ export default {
       files2: [],
       visibles: false,
       openKey: [2],
-      checkKey: [8]
+      checkKey: [8],
+      inpuValue: 911.19,
+
     };
   },
   methods: {
