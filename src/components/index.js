@@ -9,6 +9,10 @@ import pagination from './pagination/index.vue'
 import upload from './upload/index.vue'
 import fileView from './fileView/index.vue'
 import modal from './modal/index.vue'
+import Jmenu from './menu/menu.jsx'
+import JmenuSub from './menu/menuSubItem.jsx'
+import JmenuItem from './menu/menuItem.jsx'
+
 let components = [
     button,
     row,
@@ -19,7 +23,10 @@ let components = [
     upload,
     fileView,
     modal,
-    menuSubItem
+    menuSubItem,
+    Jmenu,
+    JmenuSub,
+    JmenuItem
 ]
 
 export default {

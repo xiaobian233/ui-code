@@ -23,21 +23,24 @@ export default {
     dropdownBol: false
   }),
   methods: {
-    setValue({ openKey = [], checkKey = [] }) {
+    setValue({ openKey = [], checkKey = [] }, cb) {
       this.$emit('change', {
         openKey,
         checkKey
       })
       this.$emit('update:openKey', openKey)
       this.$emit('update:checkKey', checkKey)
+      this.$nextTick(cb)
     },
     change(val) {
       this.$emit('change', val)
       this._drop && this._drop.checkOut()
     },
   },
-  mounted() {
+  created() {
     this.dropdownBol = this._drop ? true : false
+  },
+  mounted() {
     this.backgroundColors = this.backgroundColor
     if (this.dropdownBol) this.backgroundColors = "#fff"
   },

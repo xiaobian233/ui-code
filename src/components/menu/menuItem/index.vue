@@ -2,7 +2,6 @@
   <div class="w-menu-item" ref="wMenuItem" :class="[disabled ? 'disabled' : '', valueBol ? 'check' : '']"
     @click="menuItemFn">
     <slot></slot>
-    {{ valueBol }}
   </div>
 </template>
 
@@ -23,8 +22,7 @@ export default {
       else {
         let checkKey = this._el.checkKey
         checkKey = [this.value]
-        this._el.setValue({ checkKey, openKey: this._el.openKey })
-        this.$nextTick(() => {
+        this._el.setValue({ checkKey, openKey: this._el.openKey }, () => {
           this._elSub.init(true)
           this.init()
         })
@@ -32,12 +30,12 @@ export default {
     },
     init() {
       this.$nextTick(() => {
-        this._elSub.bol && (this.valueBol = this._el.checkKey.some(key => (key == this.value)))
         this._el.dropdownBol && (this.$refs.wMenuItem.className = `${this.$refs.wMenuItem.className} colorCheck color`)
+        this._elSub && this._elSub.bol && (this.valueBol = this._el.checkKey.some(key => (key == this.value)))
       })
     }
   },
-  created() {
+  mounted() {
     this.init()
   },
 };

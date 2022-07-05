@@ -31,11 +31,12 @@ export default {
       _elSub: this,
     }
   },
+  watch: {
+    '_el'() {
+      console.error(this);
+    }
+  },
   methods: {
-    menuItemFn(value) {
-      if (this.disabled) return false;
-      Ev.emit("menuItem", { value: value, ev: this.$el, parent: this.$parent });
-    },
     clickHeight(bols = false) {
       let openKey = this._el.openKey
       this.isHeight = !this.isHeight
