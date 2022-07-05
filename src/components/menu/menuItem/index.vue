@@ -16,22 +16,24 @@ export default {
   data: () => ({
     valueBol: false
   }),
+  watch: {
+    '_el.checkKey'() {
+      this.valueBol = this._el.checkKey.some(key => (key == this.value))
+    }
+  },
   methods: {
     menuItemFn() {
       if (this._el.dropdownBol) this._el.change(this.value)
       else {
         let checkKey = this._el.checkKey
         checkKey = [this.value]
-        this._el.setValue({ checkKey, openKey: this._el.openKey }, () => {
-          this._elSub.init(true)
-          this.$nextTick(this.init)
-        })
+        this._el.setValue({ checkKey, openKey: this._el.openKey })
       }
     },
     init() {
       this.$nextTick(() => {
         this._el.dropdownBol && (this.$refs.wMenuItem.className = `${this.$refs.wMenuItem.className} colorCheck color`)
-        this._elSub && this._elSub.bol && (this.valueBol = this._el.checkKey.some(key => (key == this.value)))
+        this._el && (this.valueBol = this._el.checkKey.some(key => (key == this.value)))
       })
     }
   },

@@ -32,8 +32,9 @@ export default {
     }
   },
   watch: {
-    '_el'() {
-      console.error(this);
+    '_el.openKey'() {
+      this.isHeight = !(this._el.openKey.some(key => (key == this.value)))
+      this.clickHeight(true)
     }
   },
   methods: {
@@ -46,18 +47,15 @@ export default {
         index != -1 ? openKey.splice(index, 1) : null
       }
       else {
-        openKey = [...openKey, this.value]
+        openKey = [this.value]
         this.$nextTick(() => { this.heightPx = this.$refs.wMenuSubContent.children.length * this.$refs.wMenuSubContent.children[0].offsetHeight })
       }
       if (!bols) this._el.setValue({ openKey: [...new Set(openKey)], checkKey: this._el.checkKey })
     },
-    init(bols = false) {
+    init() {
       let { _el } = this
       this.bol = _el.openKey.some(key => (key == this.value))
-      if (this.bol && !bols) this.clickHeight(true)
-      if (bols){
-        console.error(this.$refs.wMenuSubContent, 'this.$refs.wMenuSubContent');
-      }
+      if (this.bol) this.clickHeight(true)
     }
   },
   created() {
