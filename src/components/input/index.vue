@@ -21,8 +21,8 @@ export default {
         after: { type: [String, Number], default: '' },
         max: { type: [String, Number], default: '' },
         min: { type: [String, Number], default: '' },
-        money: { type: Boolean, default: false },
-        moneyInit: { type: Boolean, default: true },
+        money: { type: [Boolean,String], default: false },
+        moneyInit: { type: [Boolean,String], default: true },
         flot: { type: Number, default: 2 }
     },
     setup(props, { emit }) {
