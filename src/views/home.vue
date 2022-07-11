@@ -12,6 +12,7 @@
       </w-button>
       <w-button :disabled="true" @change="change(0)">按钮button2</w-button>
       <w-input money="true" :max="999999999999" v-model:value="inpuValue" before="￥" after="RMB" />{{ inpuValue }}
+      <w-button @click="$router.push('/tree')">Go Tree</w-button>
     </w-row>
     <hr />
     <w-row>
