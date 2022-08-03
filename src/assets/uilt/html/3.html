@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let bucket = new WeakMap()
+        let data = {
+            txt: 'hello wrod',
+            age: 88,
+            ok: false
+        }
+        let activeFn = null
+        let effect = function (fn) {
+            const effectFn = function () {
+                cleanup(effectFn)
+                activeFn = effectFn
+                fn()
+            }
+            effectFn.deps = []
+            effectFn()
+        }
+        const obj = new Proxy(data, {
+            get(target, key) {
+                let value = target[key]
+                track(target, key)
+                return value
+            },
+            set(target, key, newValue) {
+                target[key] = newValue
+                trigger(target, key)
+                return true
+            }
+        })
+
+        function cleanup(effectFn) {
+            for (let i = 0; i < effectFn.deps.length; i++) {
+                const deps = effectFn.deps[i]
+                deps.delete(effectFn)
+            }3
+            effectFn.deps.length = 0
+        }
+
+        function track(target, key) {
+            if (!activeFn) return
+            let depMap = bucket.get(target)
+            if (!depMap) bucket.set(target, (depMap = new Map()))
+            let deps = depMap.get(key)
+            if (!deps) depMap.set(key, (deps = new Set()))
+            deps.add(activeFn)
+            activeFn.deps.push(deps)
+        }
+
+        function trigger(target, key) {
+            let depMap = bucket.get(target)
+            if (!depMap) return
+            let effect = depMap.get(key)
+            effect && new Set(effect).forEach(fn => fn())
+        }
+        effect(() => {
+            document.body.innerHTML = obj.ok ? obj.txt : 'not time'
+        })
+        // effect(() => {
+        //     let dv = document.createElement('div')
+        //     dv.innerHTML = ` \n ${obj.age}`
+        //     document.body.appendChild(dv)
+        // })
+        setTimeout(() => {
+            obj.ok = false
+            setTimeout(() => {
+                obj.age = '999'
+                obj.txt = "kkkkkkkkkkkkkkkk"
+            }, 666)
+        }, 1000)
+    </script>
+</body>
+
+</html>

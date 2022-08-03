@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let remak = `\n①WeakMap的键名只支持对象， map的键名可以是任意值。\n② Map可以遍历， WeakMap不可以\n③ WeakMap是弱引用， 成员随时可以消失， 可以防止内存泄露\n`
+        let wMap = new WeakMap()
+        let key = {
+            name: '111'
+        }
+        wMap.set(key, 999)
+        key.age = '19'
+        console.error(wMap.has(key), wMap, 'weakMap');
+        console.error('================================================================');
+    </script>
+    <script>
+        let map = new Map()
+        map.set(key, '132')
+        key.error = 1
+        console.error(map.has(key), map);
+        console.error('================================================================');
+        console.error(remak);
+    </script>
+</body>
+
+</html>
