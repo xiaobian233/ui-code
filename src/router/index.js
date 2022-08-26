@@ -13,6 +13,11 @@ const routes = [
     name: 'tree',
     component: tree
   },
+  {
+    path: '/virtualRolling',
+    name: 'virtualRolling',
+    component: () => import('@/views/Virtualrolling.vue')
+  },
 ]
 
 const router = createRouter({

@@ -1,5 +1,18 @@
 <template>
   <div class="home">
+    <w-row>
+      <w-button @click="$router.push('/tree')">Go Tree</w-button>
+      <w-button @click="$router.push('/virtualRolling')">Go virtualRolling</w-button>
+    </w-row>
+    <br>
+    <!-- <Virtualrolling>
+      <template #default="{ data }">
+        <div>
+          {{ data.name }} -- {{ data.index }} -- {{ data.path }}
+        </div>
+      </template>
+    </Virtualrolling> -->
+
     <w-row span="24">
       <w-button type="primary" @change="change(1)">
         <template #before>
@@ -7,12 +20,14 @@
         </template>
         <span style="margin: 0 8px">按钮button</span>
         <template #after>
-          <span>right</span>
+          <span>``
+            <router-link to="/virtualRolling">virtualRolling</router-link>
+          </span>
         </template>
       </w-button>
       <w-button :disabled="true" @change="change(0)">按钮button2</w-button>
       <w-input money="true" :max="999999999999" v-model:value="inpuValue" before="￥" after="RMB" />{{ inpuValue }}
-      <w-button @click="$router.push('/tree')">Go Tree</w-button>
+
     </w-row>
     <hr />
     <w-row>
@@ -76,9 +91,10 @@
 
 <script>
 import { getCurrentInstance } from "vue";
+import Virtualrolling from "@/views/Virtualrolling.vue"
 export default {
   name: "HomeView",
-  components: {},
+  components: { Virtualrolling },
   setup() {
     let { $hooks } = getCurrentInstance().proxy;
     return {
