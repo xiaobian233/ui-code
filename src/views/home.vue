@@ -3,6 +3,7 @@
     <w-row>
       <w-button @click="$router.push('/tree')">Go Tree</w-button>
       <w-button @click="$router.push('/virtualRolling')">Go virtualRolling</w-button>
+      <w-button @click="$router.push('/fileSplit')">Go fileSplit</w-button>
     </w-row>
     <br>
     <!-- <Virtualrolling>
