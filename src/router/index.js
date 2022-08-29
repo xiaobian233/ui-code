@@ -22,7 +22,7 @@ const routes = [{
   },
   {
     path: '/fileSplit',
-    name: 'virtualRolling',
+    name: 'fileSplit',
     component: () => import('@/views/fileSplit.vue')
   },
 ]
