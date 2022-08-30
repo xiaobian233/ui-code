@@ -1,9 +1,11 @@
 import { createVNode, render, h, defineComponent, createApp } from "vue"
 import upload from "@/components/upload"
+let dv = null;
 const useModal = function (_app) {
     let uploadcheck = null
     function open(opt) {
-        let dv = document.createElement('div')
+        if(dv) dv.remove()
+        dv = document.createElement('div')
         dv.id = 'w-upload-root'
         document.body.appendChild(dv)
         const remove = () => {
