@@ -53,7 +53,7 @@ export default {
     pageSize: { type: [String, Number], default: 10 },
     pageSizeOptions: { type: Array, default: () => [10, 20, 30, 40, 50] },
     disabled: { type: [String, Boolean], default: false },
-    totalTitle: { type: [String, Function], default: '' }
+    totalTitle: { type: [String, Function], default: null }
   },
   setup(props, { emit }) {
     const data = reactive({ pages: [], pageTotal: 0, pageQuota: 6, pagMaxTotal: 0, pageSizeOptions: [], constNumber: 5, pageValue: '' })
@@ -113,7 +113,7 @@ export default {
     }
     watch(() => props, () => init(props), { deep: true, immediate: true })
     const getTotalTitle = computed(() => {
-      let res = `总共为: ${props.total} 条数据`
+      let res = `总共: ${props.total} 条数据`
       typeof props.totalTitle === 'string' ? res = props.totalTitle : null
       typeof props.totalTitle === 'function' ? res = props.totalTitle() : null
       return res
