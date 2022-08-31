@@ -98,7 +98,7 @@ export default defineComponent({
                 <span class="w-tree-tier" :class="{
                     'w-tree-item-open': i == 1 && item.children && item.children.length > 0,
                     'w-tree-isCheck': i == 2,
-                    'w-tree-selected': item.check
+                    'w-tree-selected': i == 2 && item.check
                 }" v-for="i in item.tier" :key="i" @click="() => clickTreeItem(i, item)">
                     <span v-if="i == 1">{{  item.open  }}</span>
                 </span>

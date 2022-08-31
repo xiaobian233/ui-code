@@ -25,9 +25,9 @@ const props = defineProps({
         type: [Number | String],
         defalut: 60
     },
-    overFiftyPercent: { // 默认为 底部最后一条加载数据, 为true时  一屏滚动到一半时加载数据
+    overFiftyPercent: { // 默认为 底部最后一条加载数据, 为true时  一屏滚动到一大半时加载数据
         type: Boolean,
-        default: false
+        default: true
     }
 })
 const data = reactive({

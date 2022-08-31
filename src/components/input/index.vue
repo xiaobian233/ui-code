@@ -64,9 +64,7 @@ export default {
             }
             else data.values = val
         }
-        watchEffect(() => {
-            maxMin()
-        })
+        watchEffect(maxMin)
         return { ...toRefs(data), inputChange, inputKeyDown, valueClick }
     }
 }
