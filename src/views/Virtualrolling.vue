@@ -43,7 +43,7 @@ const init = () => {
     nextTick(() => {
         let h = window.innerHeight;
         let { top, bottom } = el.value.getBoundingClientRect()
-        let elH = h - top - bottom
+        let elH = h - top
         data.elH = elH
         data.count = (elH / data.uinH) + 1;
         data.arr = data.demo.slice(data.startIndex, data.count)
