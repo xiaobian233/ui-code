@@ -30,74 +30,62 @@ export default defineComponent({
                 },
             ],
             treeData: [],
-            childData: []
+            childData: [],
+            keyBol: true
         })
         const opt = {
             child: false,
             tier: 2,
         }
 
-        const treeFn = (arr, parent, opt) => {
-            if (arr.length > 0) {
-                arr.map((item, index) => {
-                    item.isShow = false
-                    let { tier } = opt
-                    tier++
-                    // 判断是否有子级
-                    if (!parent) item.keys = []
-                    else {
-                        !parent.keys && (parent.keys = [])
-                        parent.keys.push(item.key)
-                        parent.isShow = true
-                        item.parent = parent
-                    }
-                    Object.assign(item, opt)
-                    datas.treeData.push(item)
-                    item.children && item.children.length > 0 && treeFn(item.children, item, {
-                        ...opt,
-                        tier,
-                    })
-                })
-            }
-        }
-        onMounted(() => {
-            treeFn(datas.data, null, opt)
-            console.error(datas.data, 'datas.data');
-        })
         const clickTreeItem = (index, item) => {
-            const arrf = ((arr, item, bols) => {
-                arr.forEach(x => {
-                    if (item.keys.includes(x.key)) {
-                        x.isShow = bols
-                        x.children && arrf(x.children, x, bol)
-                    }
-                })
-                console.error(arr, 'arr');
-            })
-            if (index == 1) {
-                if (item.children && item.children.length > 0) {
-                    arrf(datas.data, item, !item.isShow)
-                    console.error(datas.data);
-                    return item.isShow
+            let b = false;
+            if (index == 1 && item.children && item.children.length > 0) {
+                b = !item.childShow
+                item.childShow = b
+                const f = (arr, b) => {
+                    arr.forEach(x => {
+                        x.isShow = b
+                        if (!item.childShow)
+                            if (x.children && x.children.length > 0) {
+                                f(x.children, b)
+                            }
+                    })
                 }
+                f(item.children, b)
             }
         }
-        const isChild = (item) => {
-            if (datas.childData && datas.childData.length && datas.childData.length > 0) {
-                isView(datas.childData, item.isShow)
-                return item.isShow
-            }
-            return true
-        }
+
         const getters = (index, item) => {
             if (index == 1 && item.children && item.children.length > 0) return 'K'
             else return ''
         }
+        const getDatas = computed(() => {
+            let floatArr = []
+            let arrFn = (arr, index, parent = null) => (
+                arr.forEach(x => {
+                    x.isShow = datas.keyBol
+                    x.childShow = datas.keyBol
+                    if (index == 0) x.index = index
+                    if (parent) x.parent = parent
+                    if (parent && parent.tier) x.tier = parent.tier + 1
+                    else x.tier = 2
+                    if (x.children && x.children.length > 0) {
+                        arrFn(x.children, index++, x)
+                    }
+                    floatArr.push(x)
+                })
+            )
+            arrFn(datas.data, 0)
+            floatArr = floatArr.reverse()
+            console.error(floatArr, 'floatArr floatArr floatArr');
+            return floatArr
+        })
         return {
             datas,
             clickTreeItem,
-            isChild,
-            getters
+            getters,
+            getDatas
         }
     }
 })
@@ -105,12 +93,21 @@ export default defineComponent({
 
 <template>
     <div class="w-tree">
-        <template v-for="item, index in datas.treeData" :key="index">
-            <div class="w-tree-item" v-if="isChild(item)">
-                <span :class="{ 'w-tree-item-open': i == 1 }" v-for="i in item.tier" :key="i"
-                    @click="() => clickTreeItem(i, item)" class="w-tree-tier">{{ i == 1 ? getters(i, item) : ''
+        <template v-for="item, index in getDatas" :key="index">
+            <div class="w-tree-item" v-if="item.isShow">
+                <span :class="{ 'w-tree-item-open': i == 1 && item.children && item.children.length > 0 }"
+                    v-for="i in item.tier" :key="i" @click="() => clickTreeItem(i, item)" class="w-tree-tier">{{  i == 1
+                    ? getters(i, item) : ''
+
+
+
+
+
+
+
+
                     }}</span>
-                <span>{{ item.title }}</span>
+                <span>{{  item.title  }}</span>
             </div>
         </template>
     </div>
